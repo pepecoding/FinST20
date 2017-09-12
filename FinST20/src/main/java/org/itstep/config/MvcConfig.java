@@ -46,6 +46,7 @@ public class MvcConfig extends WebMvcConfigurationSupport {
         registry.addViewController("/login").setViewName("forward:/index.html");
     }
 
+
      @Override
      public void addCorsMappings(CorsRegistry registry) {
           registry.addMapping("/**")

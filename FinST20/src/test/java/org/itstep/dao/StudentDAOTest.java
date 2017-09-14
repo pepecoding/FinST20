@@ -27,8 +27,8 @@ public class StudentDAOTest {
 		student.setGroupName("ST20");
 		Student studentFromDB = studentDAO.save(student);
 		assertNotNull(studentFromDB);
-//		Student checkedStudent = studentDAO.getOne(studentFromDB.getLogin());
-//		assertNotNull(checkedStudent);
+		Student checkedStudent = studentDAO.findOne(studentFromDB.getLogin());
+		assertNotNull(checkedStudent);
 		assertEquals("Ignatenko", studentFromDB.getLastName());
 		studentDAO.delete(studentFromDB.getLogin());
 	}

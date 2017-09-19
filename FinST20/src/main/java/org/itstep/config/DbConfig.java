@@ -44,6 +44,18 @@ public class DbConfig{
 
 	@Value(value = "${hiber-option}")
 	private String hiberOption;
+	
+	@Value(value = "${database-name}")
+	private String dbName;
+
+	@Value(value = "${data-source-class-name}")
+	private String dataSourceClassName;
+
+	@Value(value = "${dialect}")
+	private String dialect;
+
+	@Value(value = "${schema}")
+	private String schema;
 
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
@@ -63,6 +75,7 @@ public class DbConfig{
 	Properties additionalProperties() {
 		Properties properties = new Properties();
 		properties.setProperty("hibernate.hbm2ddl.auto", hiberOption);
+		properties.setProperty("hibernate.dialect", dialect);
 		return properties;
 	}
 
@@ -73,6 +86,7 @@ public class DbConfig{
         dataSource.setUrl(url);
         dataSource.setUsername(username);
         dataSource.setPassword(password);
+        dataSource.setSchema(schema);
         return dataSource;
     }
 }

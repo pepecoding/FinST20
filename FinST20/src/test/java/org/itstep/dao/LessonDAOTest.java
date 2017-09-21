@@ -16,7 +16,6 @@ public class LessonDAOTest {
 	@Autowired
 	LessonDAO lessonDAO;
 	
-
 	@Test
 	public void createAndGetAndDelete() {
 		Lesson lesson = new Lesson();
@@ -26,9 +25,6 @@ public class LessonDAOTest {
 		lesson.setGroup("ST-20");
 		lesson.setRoom("2");
 		lesson.setSubject("Math");
-		
-		
-		
 		Lesson lessonFromDB = lessonDAO.saveAndFlush(lesson);
 		assertNotNull(lessonFromDB);
 		Lesson checkedLesson = lessonDAO.findOne(lessonFromDB.getLessonId());

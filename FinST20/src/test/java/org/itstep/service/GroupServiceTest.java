@@ -2,9 +2,12 @@ package org.itstep.service;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.itstep.App;
 import org.itstep.dao.StudentDAO;
 import org.itstep.dao.pojo.Group;
+import org.itstep.dao.pojo.Student;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,15 +33,24 @@ public class GroupServiceTest {
 
 	@Test
 	public void testGetGroup() {
+//		Group checkedGroup = groupService.findOne(groupFromDB.getGroupName());
+//		assertNotNull(checkedGroup);
+//		assertEquals("ST20", groupFromDB.getCourse());
+//		groupService.delete(groupFromDB.getGroupName());
 		
 	}
 
 	@Test
 	public void testFindAllByCourse() {
+//		List<Group> groupList = groupService.findAllByCourse(1);
+//		assertTrue(!groupList.isEmpty());
+//		groupService.delete(groupFromDB.getGroupName());
 	}
 
 	@Test
 	public void testDelete() {
+//		groupService.delete(groupFromDB.getGroupName());
+		
 		
 	}
 

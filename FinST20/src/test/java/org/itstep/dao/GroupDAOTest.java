@@ -27,6 +27,7 @@ public class GroupDAOTest {
 		Group groupFromDB = groupDAO.save(group);
 		List<Group> groupList = groupDAO.findAllByCourse(3);
 		assertTrue(!groupList.isEmpty());
+		groupDAO.delete(groupFromDB.getGroupName());
 	}
 	
 	@Test

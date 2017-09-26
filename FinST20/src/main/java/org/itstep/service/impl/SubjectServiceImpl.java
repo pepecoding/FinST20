@@ -27,12 +27,4 @@ public class SubjectServiceImpl implements SubjectService {
 		subjectDAO.delete(subject);
 	}
 
-	@Override
-	public boolean isUnique(Subject subject) {
-		if (subjectDAO.findOne(subject.getSubject()) == null) {
-			return true;
-		}
-		return false;
-	}
-
 }

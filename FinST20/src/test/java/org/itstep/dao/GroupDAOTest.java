@@ -39,7 +39,7 @@ public class GroupDAOTest {
 		assertNotNull(groupFromDB);
 		Group checkedGroup = groupDAO.findOne(groupFromDB.getGroupName());
 		assertNotNull(checkedGroup);
-		assertEquals("ST20", groupFromDB.getCourse());
+		assertEquals(3, groupFromDB.getCourse());
 		groupDAO.delete(groupFromDB.getGroupName());
 	}
 }

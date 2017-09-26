@@ -2,7 +2,10 @@ package org.itstep.dao;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.itstep.App;
+import org.itstep.dao.pojo.Group;
 import org.itstep.dao.pojo.Lesson;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,6 +18,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class LessonDAOTest {
 	@Autowired
 	LessonDAO lessonDAO;
+	@Autowired
+	GroupDAO groupDAO;
 	
 	@Test
 	public void createAndGetAndDelete() {
@@ -31,11 +36,109 @@ public class LessonDAOTest {
 		assertNotNull(checkedLesson);
 		assertEquals("Math", lessonFromDB.getSubject());
 		lessonDAO.delete(lessonFromDB.getLessonId());
-	
-		
 		
 	}
+	@Test
+	 public void testGetLessonsForCourseForPeriod() {
+		Lesson lesson = new Lesson();
+		lesson.setLessonStart(2L);
+		lesson.setLength(0L);
+		lesson.setRoom("2");
+		lesson.setSubject("Math");
+		lesson.setTeacher("Ivanov");
+		Group group = new Group();
+		group.setGroupName("ST20");
+		group.setCourse(1);
+		lesson.setGroup(group.getGroupName());
+		Lesson lessonFromDB = lessonDAO.save(lesson);
+		Group groupFromDB = groupDAO.save(group);
+		List<Lesson> lessonsFromDB = lessonDAO.getLessonsForCourseForPeriod(groupFromDB.getCourse(), 0L, 3L);
+		assertNotNull(lessonsFromDB);
+		assertEquals(lessonFromDB.getLessonId(), lessonsFromDB.get(0).getLessonId());
+		groupDAO.delete(groupFromDB.getGroupName());
+		lessonDAO.delete(lessonFromDB.getLessonId());
+	}
 
+	@Test
+	 public void testGetLessonsForGroupForPeriod() {
+		Lesson lesson = new Lesson();
+		lesson.setLessonStart(2L);
+		lesson.setLength(0L);
+		lesson.setRoom("2");
+		lesson.setSubject("Math");
+		lesson.setTeacher("Ivanov");
+		Group group = new Group();
+		group.setGroupName("ST20");
+		lesson.setGroup(group.getGroupName());
+		Lesson lessonFromDB = lessonDAO.save(lesson);
+		Group groupFromDB = groupDAO.save(group);
+		List<Lesson> lessonsFromDB = lessonDAO.getLessonsForGroupForPeriod(group.getGroupName(), 0L, 3L);
+		assertNotNull(lessonsFromDB);
+		assertEquals(lessonFromDB.getLessonId(), lessonsFromDB.get(0).getLessonId());
+		groupDAO.delete(groupFromDB.getGroupName());
+		lessonDAO.delete(lessonFromDB.getLessonId());
+	
+}
+	@Test
+	 public void testGetLessonsForPeriod() {
+		Lesson lesson = new Lesson();
+		lesson.setLessonStart(2L);
+		lesson.setLength(0L);
+		lesson.setRoom("2");
+		lesson.setSubject("Math");
+		lesson.setTeacher("Ivanov");
+		Group group = new Group();
+		group.setGroupName("ST20");
+		lesson.setGroup(group.getGroupName());
+		Lesson lessonFromDB = lessonDAO.save(lesson);
+		Group groupFromDB = groupDAO.save(group);
+		List<Lesson> lessonsFromDB = lessonDAO.getLessonsForPeriod("Ivanov", 2L, 3L);
+		assertNotNull(lessonsFromDB);
+		assertEquals(lessonFromDB.getLessonId(), lessonsFromDB.get(0).getLessonId());
+		groupDAO.delete(groupFromDB.getGroupName());
+		lessonDAO.delete(lessonFromDB.getLessonId());
+	
+}
+	
+	@Test
+	 public void testGetOneByGroupAndStartTime() {
+		Lesson lesson = new Lesson();
+		lesson.setLessonStart(2L);
+		lesson.setLength(0L);
+		lesson.setRoom("2");
+		lesson.setSubject("Math");
+		lesson.setTeacher("Ivanov");
+		Group group = new Group();
+		group.setGroupName("ST20");
+		lesson.setGroup(group.getGroupName());
+		Lesson lessonFromDB = lessonDAO.save(lesson);
+		Group groupFromDB = groupDAO.save(group);
+		Lesson lessonDB = lessonDAO.getOneByGroupAndStartTime(groupFromDB.getGroupName(), 2L);
+		assertNotNull(lessonDB);
+		groupDAO.delete(groupFromDB.getGroupName());
+		lessonDAO.delete(lessonFromDB.getLessonId());
+		
+	}
+	
+	@Test
+	 public void testGetOneByTeacherAndStartTime() {
+		Lesson lesson = new Lesson();
+		lesson.setLessonStart(2L);
+		lesson.setLength(0L);
+		lesson.setRoom("2");
+		lesson.setSubject("Math");
+		lesson.setTeacher("Ivanov");
+		Group group = new Group();
+		group.setGroupName("ST20");
+		lesson.setGroup(group.getGroupName());
+		Lesson lessonFromDB = lessonDAO.save(lesson);
+		Group groupFromDB = groupDAO.save(group);
+		Lesson lessonDB = lessonDAO.getOneByTeacherAndStartTime("Ivanov", 2L);
+		assertNotNull(lessonDB);
+		groupDAO.delete(groupFromDB.getGroupName());
+		lessonDAO.delete(lessonFromDB.getLessonId());
+		
+	}
 	
 
 }

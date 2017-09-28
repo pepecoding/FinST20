@@ -9,5 +9,4 @@ public interface SubjectService {
 	public Subject createAndUpdateSubject(Subject subject);
 
 	public void deleteSubject(String subject);
-
 }

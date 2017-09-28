@@ -20,12 +20,12 @@ public class LessonDAOTest {
 	LessonDAO lessonDAO;
 	@Autowired
 	GroupDAO groupDAO;
-	
+
 	@Test
 	public void createAndGetAndDelete() {
 		Lesson lesson = new Lesson();
-		lesson.setLessonStart((long)(9));
-		lesson.setLength((long)(1000*60*45));
+		lesson.setLessonStart((long) (9));
+		lesson.setLength((long) (1000 * 60 * 45));
 		lesson.setTeacher("Ivanov");
 		lesson.setGroup("ST-20");
 		lesson.setRoom("2");
@@ -36,10 +36,11 @@ public class LessonDAOTest {
 		assertNotNull(checkedLesson);
 		assertEquals("Math", lessonFromDB.getSubject());
 		lessonDAO.delete(lessonFromDB.getLessonId());
-		
+
 	}
+
 	@Test
-	 public void testGetLessonsForCourseForPeriod() {
+	public void testGetLessonsForCourseForPeriod() {
 		Lesson lesson = new Lesson();
 		lesson.setLessonStart(1L);
 		lesson.setLength(1L);
@@ -55,13 +56,13 @@ public class LessonDAOTest {
 		Group groupFromDB = groupDAO.saveAndFlush(group);
 		List<Lesson> lessonsFromDB = lessonDAO.getLessonsForCourseForPeriod(groupFromDB.getCourse(), 0L, 3L);
 		assertNotNull(lessonsFromDB);
-//		assertEquals(lessonFromDB.getLessonId(), lessonsFromDB.get(0).getLessonId());
+		// assertEquals(lessonFromDB.getLessonId(), lessonsFromDB.get(0).getLessonId());
 		groupDAO.delete(groupFromDB.getGroupName());
 		lessonDAO.delete(lessonFromDB.getLessonId());
 	}
 
 	@Test
-	 public void testGetLessonsForGroupForPeriod() {
+	public void testGetLessonsForGroupForPeriod() {
 		Lesson lesson = new Lesson();
 		lesson.setLessonStart(1L);
 		lesson.setLength(1L);
@@ -77,13 +78,14 @@ public class LessonDAOTest {
 		Group groupFromDB = groupDAO.saveAndFlush(group);
 		List<Lesson> lessonsFromDB = lessonDAO.getLessonsForGroupForPeriod(groupFromDB.getGroupName(), 0L, 3L);
 		assertNotNull(lessonsFromDB);
-//		assertEquals(lessonFromDB.getLessonId(), lessonsFromDB.get(0).getLessonId());
+		// assertEquals(lessonFromDB.getLessonId(), lessonsFromDB.get(0).getLessonId());
 		groupDAO.delete(groupFromDB.getGroupName());
 		lessonDAO.delete(lessonFromDB.getLessonId());
-	
-}
+
+	}
+
 	@Test
-	 public void testGetLessonsForPeriod() {
+	public void testGetLessonsForPeriod() {
 		Lesson lesson = new Lesson();
 		lesson.setLessonStart(2L);
 		lesson.setLength(1L);
@@ -98,14 +100,14 @@ public class LessonDAOTest {
 		Group groupFromDB = groupDAO.saveAndFlush(group);
 		List<Lesson> lessonsFromDB = lessonDAO.getLessonsForPeriod("Ivanov", 2L, 3L);
 		assertNotNull(lessonsFromDB);
-//		assertEquals(lessonFromDB.getLessonId(), lessonsFromDB.get(0).getLessonId());
+		// assertEquals(lessonFromDB.getLessonId(), lessonsFromDB.get(0).getLessonId());
 		groupDAO.delete(groupFromDB.getGroupName());
 		lessonDAO.delete(lessonFromDB.getLessonId());
-	
-}
-	
+
+	}
+
 	@Test
-	 public void testGetOneByGroupAndStartTime() {
+	public void testGetOneByGroupAndStartTime() {
 		Lesson lesson = new Lesson();
 		lesson.setLessonStart(2L);
 		lesson.setLength(0L);
@@ -121,11 +123,11 @@ public class LessonDAOTest {
 		assertNotNull(lessonDB);
 		groupDAO.delete(groupFromDB.getGroupName());
 		lessonDAO.delete(lessonFromDB.getLessonId());
-		
+
 	}
-	
+
 	@Test
-	 public void testGetOneByTeacherAndStartTime() {
+	public void testGetOneByTeacherAndStartTime() {
 		Lesson lesson = new Lesson();
 		lesson.setLessonStart(2L);
 		lesson.setLength(0L);
@@ -141,8 +143,7 @@ public class LessonDAOTest {
 		assertNotNull(lessonDB);
 		groupDAO.delete(groupFromDB.getGroupName());
 		lessonDAO.delete(lessonFromDB.getLessonId());
-		
+
 	}
-	
 
 }

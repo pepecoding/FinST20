@@ -30,7 +30,6 @@ public class GroupServiceTest {
 		groupService.deleteGroup(groupFromDB.getGroupName());
 	}
 
-
 	@Test
 	public void testGetGroup() {
 		Group group = new Group();
@@ -41,10 +40,7 @@ public class GroupServiceTest {
 		assertNotNull(checkedGroup);
 		assertNotEquals("ST20", groupFromDB.getCourse());
 		groupService.deleteGroup(groupFromDB.getGroupName());
-		
 	}
-
-
 
 	@Test
 	public void testFindAllByCourse() {
@@ -57,7 +53,6 @@ public class GroupServiceTest {
 		groupService.deleteGroup(groupFromDB.getGroupName());
 	}
 
-
 	@Test
 	public void testDelete() {
 		Group group = new Group();
@@ -67,8 +62,7 @@ public class GroupServiceTest {
 		List<Group> groupList = groupService.findAllByCourse(1);
 		assertTrue(!groupList.isEmpty());
 		groupService.deleteGroup(groupFromDB.getGroupName());
-		
-		
+		Group checkedGroup = groupService.getGroup(groupFromDB.getGroupName());
+		assertNull(checkedGroup);
 	}
-
 }

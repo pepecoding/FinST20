@@ -1,8 +1,8 @@
 package org.itstep.controller;
 
-import org.itstep.dao.pojo.Group;
 import org.itstep.dao.pojo.Subject;
 import org.itstep.service.SubjectService;
+import org.itstep.dao.SubjectDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +27,7 @@ public class SubjectController {
 
 	@PostMapping
 	public ResponseEntity<Subject> createSubject(@RequestBody Subject subject) {
-		if (subjectService.isUnique(subject)) {
+		if (subjectService.getSubject(subject.getSubject()) == null) {
 			Subject subjectDB = subjectService.createAndUpdateSubject(subject);
 			if (subjectDB == null) {
 				return new ResponseEntity<Subject>(HttpStatus.BAD_REQUEST);
@@ -39,7 +39,7 @@ public class SubjectController {
 
 	@PutMapping
 	public ResponseEntity<Subject> updateSubject(@RequestBody Subject subject) {
-		if (!subjectService.isUnique(subject)) {
+		if (subjectService.getSubject(subject.getSubject()) != null) {
 			Subject subjectDB = subjectService.createAndUpdateSubject(subject);
 			if (subjectDB == null) {
 				return new ResponseEntity(HttpStatus.BAD_REQUEST);

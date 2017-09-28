@@ -64,6 +64,8 @@ public class GroupServiceTest {
 		group.setCourse(1);
 		group.setGroupName("ST20");
 		Group groupFromDB = groupService.createAndUpdateGroup(group);
+		List<Group> groupList = groupService.findAllByCourse(1);
+		assertTrue(!groupList.isEmpty());
 		groupService.deleteGroup(groupFromDB.getGroupName());
 		
 		

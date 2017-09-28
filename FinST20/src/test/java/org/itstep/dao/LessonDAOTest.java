@@ -72,9 +72,10 @@ public class LessonDAOTest {
 		Lesson lessonFromDB = lessonDAO.saveAndFlush(lesson);
 		Group group = new Group();
 		group.setGroupName("ST20");
+		group.setCourse(1);
 		lesson.setGroup(group.getGroupName());
 		Group groupFromDB = groupDAO.saveAndFlush(group);
-		List<Lesson> lessonsFromDB = lessonDAO.getLessonsForGroupForPeriod(group.getGroupName(), 0L, 3L);
+		List<Lesson> lessonsFromDB = lessonDAO.getLessonsForGroupForPeriod(groupFromDB.getGroupName(), 0L, 3L);
 		assertNotNull(lessonsFromDB);
 //		assertEquals(lessonFromDB.getLessonId(), lessonsFromDB.get(0).getLessonId());
 		groupDAO.delete(groupFromDB.getGroupName());

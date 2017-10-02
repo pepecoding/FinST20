@@ -26,9 +26,9 @@ public class StudentServiceTest {
 		student.setFirstName("Vasiliy");
 		student.setLastName("Pupkin");
 		student.setGroupName("ST-20");
-		Student studentFromDB = studentService.save(student);
+		Student studentFromDB = studentService.createAndUpdateStudent(student);
 		assertNotNull(studentFromDB);
-		Student checkedStudent = studentService.findOne(studentFromDB.getLastName());
+		Student checkedStudent = studentService.getStudent(studentFromDB.getLastName());
 		assertEquals ("Pupkin", checkedStudent.getLastName());
 	}
 
@@ -40,10 +40,9 @@ public class StudentServiceTest {
 		student.setFirstName("Vasiliy");
 		student.setLastName("Pupkin");
 		student.setGroupName("ST-20");
-		Student studentFromDB = studentService.save(student);
-		assertNotNull(studentFromDB);
 		Student studentFromDB = studentService.createAndUpdateStudent(student);
-		Student chekedStudent = studentService.findOne(studentFromDB.getLogin());
+		assertNotNull(studentFromDB);
+		Student chekedStudent = studentService.getStudent(studentFromDB.getLogin());
 		assertEquals("Vasiliy17", studentFromDB.getLogin());
 	}
 
@@ -55,7 +54,7 @@ public class StudentServiceTest {
 		student.setFirstName("Vasiliy");
 		student.setLastName("Pupkin");
 		student.setGroupName("ST-20");
-		Student studentFromDB = studentService.save(student);
+		Student studentFromDB = studentService.createAndUpdateStudent(student);
 		studentService.deleteStudent(studentFromDB);
 	    assertNull (studentFromDB);
 	}
@@ -80,7 +79,7 @@ public class StudentServiceTest {
 		student.setFirstName("Vasiliy");
 		student.setLastName("Pupkin");
 		student.setGroupName("ST-20");
-		List<Student> studentList = studentService.findAllStudentsByCourse(course);
+		List<Student> studentList = studentService.findAllStudentsByCourse(1);
 		assertTrue(!studentList.isEmpty());
 					
 	}

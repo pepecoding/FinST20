@@ -48,6 +48,8 @@ public class GroupServiceTest {
 		List<Group> groupList = groupService.findAllByCourse(1);
 		assertTrue(!groupList.isEmpty());
 		groupService.deleteGroup(groupFromDB.getGroupName());
+		
+		
 	}
 
 	@Test

@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = App.class)
 public class StudentServiceTest {
-	
+
 	@Autowired
 	StudentService studentService;
 
@@ -29,7 +29,7 @@ public class StudentServiceTest {
 		Student studentFromDB = studentService.createAndUpdateStudent(student);
 		assertNotNull(studentFromDB);
 		Student checkedStudent = studentService.getStudent(studentFromDB.getLastName());
-		assertEquals ("Pupkin", checkedStudent.getLastName());
+		assertEquals("Pupkin", checkedStudent.getLastName());
 	}
 
 	@Test
@@ -56,7 +56,7 @@ public class StudentServiceTest {
 		student.setGroupName("ST-20");
 		Student studentFromDB = studentService.createAndUpdateStudent(student);
 		studentService.deleteStudent(studentFromDB);
-	    assertNull (studentFromDB);
+		assertNull(studentFromDB);
 	}
 
 	@Test
@@ -68,7 +68,7 @@ public class StudentServiceTest {
 		student.setLastName("Pupkin");
 		student.setGroupName("ST-20");
 		List<Student> studentList = studentService.findStudentsByGroup("ST20");
-		assertTrue (!studentList.isEmpty());
+		assertTrue(!studentList.isEmpty());
 	}
 
 	@Test
@@ -81,7 +81,7 @@ public class StudentServiceTest {
 		student.setGroupName("ST-20");
 		List<Student> studentList = studentService.findAllStudentsByCourse(1);
 		assertTrue(!studentList.isEmpty());
-					
+
 	}
 
 }

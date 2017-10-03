@@ -17,6 +17,9 @@ public class StudentServiceTest {
 
 	@Autowired
 	StudentService studentService;
+	
+	@Autowired
+	GroupService groupService;
 
 	@Test
 	public void testGetStudent() {
@@ -28,24 +31,11 @@ public class StudentServiceTest {
 		student.setGroupName("ST-20");
 		Student studentFromDB = studentService.createAndUpdateStudent(student);
 		assertNotNull(studentFromDB);
-		Student checkedStudent = studentService.getStudent(studentFromDB.getLastName());
+		Student checkedStudent = studentService.getStudent(studentFromDB.getLogin());
 		assertEquals("Pupkin", checkedStudent.getLastName());
 	}
 
-	@Test
-	public void testCreateAndUpdateStudent() {
-		Student student = new Student();
-		student.setLogin("Vasiliy17");
-		student.setPassword("123456");
-		student.setFirstName("Vasiliy");
-		student.setLastName("Pupkin");
-		student.setGroupName("ST-20");
-		Student studentFromDB = studentService.createAndUpdateStudent(student);
-		assertNotNull(studentFromDB);
-		Student chekedStudent = studentService.getStudent(studentFromDB.getLogin());
-		assertEquals("Vasiliy17", studentFromDB.getLogin());
-	}
-
+	
 	@Test
 	public void testDeleteStudent() {
 		Student student = new Student();
@@ -67,6 +57,9 @@ public class StudentServiceTest {
 		student.setFirstName("Vasiliy");
 		student.setLastName("Pupkin");
 		student.setGroupName("ST-20");
+		Group group = new Group();
+		group.setCourse(1);
+		group.setGroupName("ST20");
 		List<Student> studentList = studentService.findStudentsByGroup("ST20");
 		assertTrue(!studentList.isEmpty());
 	}
